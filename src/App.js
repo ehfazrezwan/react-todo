@@ -1,11 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 
 function App() {
+  const [todos, setTodos] = useState([]);
+  const [input, setInput] = useState("");
+
+  const addTodo = (e) => {
+    e.preventDefault();
+    setTodos([...todos, input]);
+    setInput("");
+  };
+
   return (
     <div className="app">
       <h1>Welcome to my TODO l=List</h1>
-      <input type="text" />
-      <button>Add todo</button>
+
+      <form>
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
+        <button type="submit" onClick={addTodo}>
+          Add todo
+        </button>
+      </form>
+
+      <h2>List of TODO's</h2>
+      {todos.map((todo) => (
+        <p>{todo}</p>
+      ))}
     </div>
   );
 }
